@@ -58,7 +58,7 @@ public class CustomerDAO implements ICustomerDAO {
         Customer customer = null;
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(SELECT_CUSTOMER_BY_ID)) {
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, Math.toIntExact(id));
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 System.out.println(preparedStatement);
                 while (resultSet.next()) {

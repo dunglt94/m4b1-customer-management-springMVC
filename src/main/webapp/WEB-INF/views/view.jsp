@@ -19,7 +19,6 @@
             <tr>
                 <td>Id</td>
                 <td>
-                    <input type="hidden" id="id" name="id" value="${customer.id}">
                     ${customer.id}
                 </td>
             </tr>
