@@ -15,8 +15,11 @@ public class CustomerDAO implements ICustomerDAO {
     private final String jdbcPassword = "123456";
 
     private static final String SELECT_ALL_CUSTOMERS = "SELECT * FROM customers";
+    private static final String INSERT_CUSTOMER = "call insert_customer(?,?,?)";
     private static final String SELECT_CUSTOMER_BY_ID = "SELECT * FROM customers WHERE id = ?";
     private static final String UPDATE_CUSTOMER = "call update_customer(?,?,?,?)";
+    private static final String DELETE_CUSTOMER = "delete from customers where id = ?";
+
 
     public Connection getConnection() throws SQLException {
         Connection connection = null;
@@ -86,6 +89,36 @@ public class CustomerDAO implements ICustomerDAO {
             callableStatement.setInt(4, customer.getId());
             callableStatement.executeUpdate();
             System.out.println(callableStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //noinspection CallToPrintStackTrace
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void create(Customer customer) {
+        try (Connection connection = getConnection();
+             CallableStatement callableStatement = connection.prepareCall(INSERT_CUSTOMER)) {
+            callableStatement.setString(1, customer.getName());
+            callableStatement.setString(2, customer.getEmail());
+            callableStatement.setString(3, customer.getAddress());
+            callableStatement.executeUpdate();
+            System.out.println(callableStatement);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            //noinspection CallToPrintStackTrace
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void remove(int id) {
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_CUSTOMER)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            System.out.println(preparedStatement);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             //noinspection CallToPrintStackTrace

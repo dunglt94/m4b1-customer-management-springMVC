@@ -23,4 +23,14 @@ public class CustomerService implements ICustomerService {
     public void update(Customer customer) {
         customerDAO.update(customer);
     }
+
+    @Override
+    public void create(Customer customer) {
+        customerDAO.create(customer);
+    }
+
+    @Override
+    public void remove(int id) {
+        customerDAO.remove(id);
+    }
 }
