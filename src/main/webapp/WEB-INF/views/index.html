@@ -11,6 +11,11 @@
         Add new customer
     </a>
 </p>
+<div class="notify">
+    <div th:if="${success}" style="margin-bottom: 5px;">
+        <span th:text="${success}"></span>
+    </div>
+</div>
 <table id="customers">
     <thead>
         <tr>
@@ -29,6 +34,12 @@
         </td>
         <td th:text="${customer.email}"></td>
         <td th:text="${customer.address}"></td>
+        <td>
+            <a th:href="@{/customers/{id}/edit(id=${customer.id})}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/customers/{id}/delete(id=${customer.id})}">Delete</a>
+            </td>
     </tr>
     </tbody>
 </table>

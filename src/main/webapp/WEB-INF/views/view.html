@@ -6,6 +6,7 @@
 </head>
 <body>
 <h3>Customer details</h3>
+<p><a th:href="@{/customers}">Back to customer list</a></p>
 <table id="customers" style="width: 40%">
     <thead>
     <tr>
@@ -31,7 +32,6 @@
         </tr>
     </tbody>
 </table>
-<p><a th:href="@{/customers}">Back to list</a></p>
 <footer th:insert="/layout :: footer"></footer>
 </body>
 </html>
